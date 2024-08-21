@@ -7,7 +7,6 @@ def relu(z: np.ndarray) -> np.ndarray:
 
 
 def softmax(z: np.ndarray) -> np.ndarray:
-    # z = np.clip(z, -500, 500)  # Clip values to prevent extreme values
     z_max = np.max(z, axis=1, keepdims=True)
     z = np.exp(z - z_max)
     return z / (z.sum() + 1e-8)
@@ -15,7 +14,6 @@ def softmax(z: np.ndarray) -> np.ndarray:
 
 def cross_entropy(a: np.ndarray, y: np.ndarray):
     i = np.argmax(y[0])
-    # print(i, np.argmax(a[0]), a[0][i])
     return - np.log(a[0][i])
 
 
