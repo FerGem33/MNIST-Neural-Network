@@ -1,4 +1,5 @@
 from time import time
+from json import dump, load
 import numpy as np
 
 
@@ -21,11 +22,11 @@ class Layer:
     def __init__(self, n_in: int, n_out: int, activation):
         self.n = n_out  # neurons in layer
         self.W = np.random.randn(n_in, n_out) * np.sqrt(2 / n_in)  # weights
-        self.b = np.zeros((1, n_out))   # biases
+        self.b = np.zeros((1, n_out))  # biases
         self.activation = activation
 
-        self.a = np.empty((1, n_out))   # activations
-        self.z = np.empty((1, n_out))   # weighted sum
+        self.a = np.empty((1, n_out))  # activations
+        self.z = np.empty((1, n_out))  # weighted sum
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         self.z = np.dot(x, self.W) + self.b
@@ -37,6 +38,34 @@ class NeuralNetwork:
     def __init__(self):
         self.l = []
         self.L = 0
+
+    def save_network(self, filename):
+        weights = []
+        biases = []
+
+        for layer in self.l:
+            weights.append(layer.W)
+            biases.append(layer.b)
+        params = {}
+
+        for i, (w, b) in enumerate(zip(weights, biases)):
+            params[f'W{i}'] = w
+            params[f'b{i}'] = b
+
+        np.savez(f'models/{filename}.npz', **params)
+
+    def load_network(self, filename):
+        self.__init__()
+        params = np.load(f'models/{filename}.npz')
+        L = len(params) // 2
+
+        for i in range(L):
+            W = params[f'W{i}']
+            b = params[f'b{i}']
+            self.add_layer(W.shape[0], W.shape[1], relu)
+            self.l[i].W = W
+            self.l[i].b = b
+        self.l[-1].activation = softmax
 
     def add_layer(self, n_in: int, n_out: int, activation):
         self.l.append(Layer(n_in, n_out, activation))
@@ -100,4 +129,3 @@ class NeuralNetwork:
                 predicted += 1
 
         print(f'Average loss: {loss / t}, Predicted: {predicted}, Accuracy: {predicted / t}, Time: {time() - t1}s')
-        
