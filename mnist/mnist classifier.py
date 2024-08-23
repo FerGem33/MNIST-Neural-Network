@@ -15,13 +15,11 @@ nn.add_layer(784, 128, relu)
 nn.add_layer(128, 10, softmax)
 
 # train network
-nn.train(data, data_labels, epochs=5)
+nn.train(data, data_labels, epochs=20)
 
 # validation test
 permutation = np.random.permutation(len(test))
 nn.predict(test[permutation], test_labels[permutation])
 
+# save weights and biases
 nn.save_network('nn1')
-nn.load_network('nn1')
-
-nn.predict(test[permutation], test_labels[permutation])
