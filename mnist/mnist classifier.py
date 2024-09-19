@@ -11,11 +11,16 @@ test_labels = np.array(pd.read_csv('data/test_labels.csv'))
 
 # create network
 nn = NeuralNetwork()
+
+"""
 nn.add_layer(784, 128, relu)
 nn.add_layer(128, 10, softmax)
+"""
+
+nn.load_network('nn1')
 
 # train network
-nn.train(data, data_labels, epochs=20)
+nn.train(data, data_labels, 10, 0.001)
 
 # validation test
 permutation = np.random.permutation(len(test))
