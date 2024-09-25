@@ -1,6 +1,7 @@
 mnist/.ipynb_checkpoints/
 mnist/.idea/
 mnist/data/
+mnist/__pycache__
 nn.ipynb
 test.ipynb
 maths.ipynb
