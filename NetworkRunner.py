@@ -1,7 +1,7 @@
 import numpy as np
 from pandas import read_csv
-from mnist.network import NeuralNetwork
-from mnist.util.functions import funcs
+from network import NeuralNetwork
+from util.functions import funcs
 import ctypes
 
 

@@ -1,8 +1,4 @@
-mnist/.ipynb_checkpoints/
-mnist/.idea/
-mnist/data/
-mnist/__pycache__
-minst/venv
-nn.ipynb
-test.ipynb
-maths.ipynb
+.git/
+.idea/
+venv/
+__pycache__/
