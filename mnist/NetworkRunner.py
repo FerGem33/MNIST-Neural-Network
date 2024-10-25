@@ -48,6 +48,7 @@ class NetworkRunner:
 
         data, data_labels = self.load_train()
         test, test_labels = self.load_test()
+        filename = ''
     
         create_new = True if input("Create new network? (y/n): ") == "y" else False
         if create_new:
@@ -67,9 +68,8 @@ class NetworkRunner:
             print()
 
         save = True if input("Save network? (y/n): ") == "y" else False
-        filename = self.name
         if save:
-            temp = input(f'Name of file to save to? (defaults to \"{self.name}\"): ')
+            temp = input(f'Name of file to save to? (defaults to \"{filename}\"): ')
             if temp != '':
                 filename = temp
         print()
