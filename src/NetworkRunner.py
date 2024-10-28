@@ -1,7 +1,7 @@
 import numpy as np
 from pandas import read_csv
-from network import NeuralNetwork
-from util.functions import funcs
+from src.network import NeuralNetwork
+from src.util.functions import funcs
 import ctypes
 
 
@@ -48,17 +48,20 @@ class NetworkRunner:
 
         data, data_labels = self.load_train()
         test, test_labels = self.load_test()
-        filename = ''
+        filename = self.name
     
         create_new = True if input("Create new network? (y/n): ") == "y" else False
         if create_new:
             self.create_network()
         else:
-            filename = input(f'Name of file to load from? (defaults to \"{self.name}\"): ')
-            if filename == '':
-                filename = self.name
-            self.nn.load_network(filename)
-            print(f"Loaded network from \"models/{filename}.npz\"")
+            temp = input(f'Name of file to load from? (defaults to \"{self.name}\"): ')
+            if temp != '':
+                filename = temp
+            try:
+                self.nn.load_network(filename)
+                print(f"Loaded network from \"models/{filename}.npz\"")
+            except FileNotFoundError:
+                print("Model not found.")
             print()
 
         train = True if input("Train? (y/n): ") == "y" else False

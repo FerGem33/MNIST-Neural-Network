@@ -1,6 +1,6 @@
 from time import time
 import numpy as np
-from util.functions import funcs
+from src.util.functions import funcs
 
 
 class Layer:
