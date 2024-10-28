@@ -1,4 +1,4 @@
-from NetworkRunner import NetworkRunner
+from src.NetworkRunner import NetworkRunner
 
 class_names = [
     "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
